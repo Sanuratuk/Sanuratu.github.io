@@ -1,104 +1,712 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name - Research Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sanuratu Koroma — Personal Website" />
+  <title>Sanuratu Koroma — Portfolio</title>
+
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #fdfdfd;
-      color: #333;
-      margin: 0;
-      line-height: 1.6;
+    :root{
+      --bg:#0b0f17;
+      --card:#121a28;
+      --muted:#a7b1c2;
+      --text:#e9eef6;
+      --accent:#66b3ff;
+      --accent2:#7ee787;
+      --border:rgba(255,255,255,.09);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1100px;
     }
-    header {
-      background: #0a192f;
-      color: white;
-      padding: 50px 20px;
-      text-align: center;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 10% 0%, rgba(102,179,255,.15), transparent 60%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(126,231,135,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
+    a{color:inherit}
+    .container{max-width:var(--max); margin:0 auto; padding: 0 20px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,23,.65);
+      border-bottom:1px solid var(--border);
     }
-    header p {
-      font-size: 1.2em;
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 0;
+      gap:14px;
     }
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    .brand{
+      display:flex; gap:10px; align-items:center; text-decoration:none;
+      font-weight:700;
     }
-    h2 {
-      border-bottom: 2px solid #0a192f;
-      padding-bottom: 6px;
-      margin-top: 30px;
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(102,179,255,.12);
     }
-    .project, .pub {
-      margin-bottom: 20px;
+    .links{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+    .links a{
+      text-decoration:none;
+      color:var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
     }
-    a {
-      color: #0a192f;
-      text-decoration: none;
+    .links a:hover{
+      color:var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,.03);
     }
-    a:hover {
-      text-decoration: underline;
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      text-decoration:none;
+      color: var(--text);
     }
-    footer {
-      background: #0a192f;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      margin-top: 50px;
+    .btn:hover{transform: translateY(-1px); box-shadow: var(--shadow)}
+    .btn.primary{
+      border: none;
+      background: linear-gradient(135deg, rgba(102,179,255,.95), rgba(126,231,135,.9));
+      color:#06101d;
+      font-weight:700;
     }
+
+    /* ===== Headshot strip ===== */
+    .headshot-wrap{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      padding:32px;
+    }
+    .headshot{
+      width:160px;
+      height:160px;
+      border-radius:24px;
+      object-fit:cover;
+      border:2px solid var(--border);
+      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.02);
+    }
+    .identity h1{
+      margin:0;
+      font-size: clamp(28px, 3.5vw, 40px);
+      line-height:1.15;
+    }
+    .identity .title{
+      color: var(--muted);
+      font-weight:600;
+      margin-top:6px;
+    }
+    .identity .location{
+      margin-top:8px;
+      color: var(--muted);
+      font-size:.95rem;
+    }
+    @media (max-width: 720px){
+      .headshot-wrap{
+        flex-direction:column;
+        text-align:center;
+      }
+    }
+
+    header.hero{padding: 22px 0 28px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns: 1fr}
+    }
+    .card{
+      background: rgba(18,26,40,.85);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-main{padding: 28px}
+    .kicker{
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: .2px;
+    }
+    h1{
+      margin: 10px 0 10px;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.15;
+    }
+    .subtitle{color: var(--muted); font-size: 1.05rem; max-width: 60ch}
+    .hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    .hero-side{padding: 22px}
+    .pillrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .pill{
+      font-size:.9rem;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      color: var(--muted);
+      background: rgba(255,255,255,.02);
+    }
+    .stat{
+      margin-top:16px;
+      padding: 14px;
+      border-radius: 16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+    }
+    .stat strong{display:block}
+    .section{padding: 26px 0}
+    .section h2{
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+    }
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .col-6{grid-column: span 6}
+    .col-4{grid-column: span 4}
+    .col-8{grid-column: span 8}
+    .col-12{grid-column: span 12}
+    @media (max-width: 920px){
+      .col-6,.col-4,.col-8{grid-column: span 12}
+    }
+
+    .item{
+      padding: 16px;
+      border-radius: 16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+    }
+    .item h3{margin: 0 0 6px; font-size: 1.05rem}
+    .item .meta{color:var(--muted); font-size:.95rem; margin-bottom:10px}
+    .tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:10px}
+    .tag{
+      font-size:.85rem;
+      padding: 6px 9px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      color: var(--muted);
+    }
+    .toolbar{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:space-between;
+      margin: 10px 0 14px;
+    }
+    .search{
+      display:flex; gap:10px; align-items:center;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      padding: 10px 12px;
+      border-radius: 14px;
+      min-width: min(520px, 100%);
+    }
+    .search input{
+      width:100%;
+      background: transparent;
+      border:none;
+      outline:none;
+      color: var(--text);
+      font-size: .98rem;
+    }
+    .select{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      outline:none;
+    }
+    footer{
+      padding: 30px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+    .small{font-size:.95rem}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Your Name</h1>
-    <p>PhD Candidate | Researcher in XYZ | University/Institution</p>
-  </header>
+  <div class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Go to top">
+          <span class="dot"></span>
+          <span>Sanuratu Koroma</span>
+        </a>
 
-  <div class="container">
-    <h2>About Me</h2>
-    <p>I am a PhD candidate at [Institution], working on [focus area]. My work focuses on [1-2 line description of your research].</p>
-
-    <h2>Research Interests</h2>
-    <p>• Machine Learning for Architecture<br>• Non-Volatile Memory Systems<br>• Sustainable Computing</p>
-
-    <h2>Publications</h2>
-    <div class="pub">
-      <strong>Title of Paper</strong><br>
-      Author names, Conference/Journal, Year. <a href="#">[PDF]</a>
+        <nav class="links" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#publications">Publications</a>
+          <a href="#experience">Work</a>
+          <a href="#extra">Extra</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
     </div>
-
-    <h2>Selected Projects</h2>
-    <div class="project">
-      <strong>STT-RAM Redundant Write Optimization</strong>
-      <p>
-        Investigated redundant writes in STT-RAM L3 cache and posed the question: could traditional SRAM caches reuse the same strategies for efficiency?
-        While promising, results suggest redundancy may stem from STT-RAM-specific characteristics rather than current SRAM behavior.
-      </p>
-    </div>
-
-    <h2>CV</h2>
-    <p><a href="your_cv.pdf" target="_blank">Download my CV (PDF)</a></p>
-
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:yourname@example.com">yourname@example.com</a><br />
-      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> |
-      <a href="https://github.com/yourusername" target="_blank">GitHub</a> |
-      <a href="https://scholar.google.com/citations?user=yourid" target="_blank">Google Scholar</a>
-    </p>
   </div>
 
-  <footer>
-    &copy; 2025 Your Name. All rights reserved.
-  </footer>
+  <main id="top">
+
+    <!-- ===== Headshot strip (TOP) ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="card headshot-wrap">
+          <img
+            src="./assets/images/headshot.jpg"
+            alt="Sanuratu Koroma headshot"
+            class="headshot"
+          />
+
+          <div class="identity">
+            <h1>Sanuratu Koroma</h1>
+            <div class="title">
+              Ph.D. Student (Computer Science) · Applied Machine Learning · Data Analytics
+            </div>
+            <div class="location">
+              Amherst, Massachusetts, USA · <a href="mailto:skoroma@umass.edu">skoroma@umass.edu</a>
+            </div>
+
+            <div class="hero-actions" style="margin-top:14px;">
+              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn" href="#publications">Publications</a>
+              <a class="btn" href="./cv.pdf" target="_blank" rel="noreferrer">CV</a>
+              <a class="btn" href="https://github.com/Sanuratuk" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn" href="https://linkedin.com/in/sanuratu-koroma" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+
+            <div class="pillrow" style="margin-top:14px;">
+              <span class="pill">Geospatial ML</span>
+              <span class="pill">Energy Systems</span>
+              <span class="pill">Neural Networks</span>
+              <span class="pill">HPC</span>
+              <span class="pill">Earth Engine</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Hero ===== -->
+    <header class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <section class="card hero-main">
+            <div class="kicker">Ph.D. Research • ML • Infrastructure & Development</div>
+            <h1>
+              Building data-driven tools for
+              <span style="background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent;">
+                measurement and impact
+              </span>.
+            </h1>
+            <p class="subtitle">
+              I’m a second-year Ph.D. student in Computer Science at the University of Massachusetts Amherst.
+              My background combines applied machine learning, neural networks, and data analytics, with interests in
+              infrastructure measurement, urbanization, energy systems, and development.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn" href="#publications">Publications</a>
+              <a class="btn" href="#contact">Contact</a>
+              <a class="btn" href="./cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
+            </div>
+          </section>
+
+          <aside class="card hero-side">
+            <div class="muted small">Quick info</div>
+
+            <div class="stat">
+              <strong>Affiliation</strong>
+              <div class="muted">University of Massachusetts Amherst</div>
+            </div>
+
+            <div class="stat">
+              <strong>Education</strong>
+              <div class="muted">Ph.D. Computer Science (present)</div>
+              <div class="muted">MSc Electrical & Computer Engineering (CMU, 2022–2023)</div>
+              <div class="muted">BSc Electrical & Electronic Engineering (Ashesi, 2016–2020)</div>
+            </div>
+
+            <div class="stat">
+              <strong>Awards</strong>
+              <div class="muted">Spaulding Smith Fellowship (UMass Amherst)</div>
+              <div class="muted">MasterCard Foundation Scholar Program (CMU Africa, Ashesi)</div>
+            </div>
+
+            <div class="stat">
+              <strong>Stack</strong>
+              <div class="pillrow">
+                <span class="pill">Python</span>
+                <span class="pill">C/C++</span>
+                <span class="pill">Geo</span>
+                <span class="pill">ML</span>
+                <span class="pill">Cesium</span>
+                <span class="pill">VS Code</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== About ===== -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About</h2>
+        <div class="card" style="padding:18px;">
+          <p class="muted" style="margin-top:0;">
+            I’m a Ph.D. student in Computer Science with research experience in applied machine learning,
+            neural networks, and data analytics and their applications to infrastructure, measurement, and development.
+            I also hold a Master’s in Electrical and Computer Engineering focused on renewable energy and energy policy,
+            IoT/embedded systems, and data science.
+          </p>
+
+          <div class="grid" style="margin-top:10px;">
+            <div class="item col-6">
+              <h3>Research interests</h3>
+              <div class="muted">
+                Infrastructure measurement, geospatial analytics, urbanization trends, applied ML and neural networks,
+                energy systems, emissions prediction, and climate finance.
+              </div>
+            </div>
+
+            <div class="item col-6">
+              <h3>Highlights</h3>
+              <ul class="muted" style="margin:0; padding-left:18px;">
+                <li>Applied ML + data analytics for infrastructure and development questions</li>
+                <li>Energy + emissions work spanning monitoring and prediction</li>
+                <li>Hands-on engineering background (smart meters, PCB, networks)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Projects</h2>
+
+        <div class="toolbar">
+          <div class="search" role="search">
+            <span class="muted mono">/</span>
+            <input id="projectSearch" type="text" placeholder="Search projects (title, tags, text)..." />
+          </div>
+          <select id="tagFilter" class="select" aria-label="Filter by tag">
+            <option value="all">All tags</option>
+          </select>
+        </div>
+
+        <div id="projectsGrid" class="grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== Publications ===== -->
+    <section id="publications" class="section">
+      <div class="container">
+        <h2>Publications</h2>
+        <div class="card" style="padding:18px;">
+          <div class="grid">
+
+            <div class="item col-12">
+              <h3>Digital Monitoring for Health Facility Emission Prediction and Climate Finance</h3>
+              <div class="meta">IEEE Global Humanitarian Technology Conference (GHTC) · Second Author · (Add year)</div>
+              <div class="muted">
+                Research on digital monitoring approaches for estimating health-facility emissions and linking verified emissions to climate finance.
+              </div>
+              <div class="tags">
+                <a class="btn" href="#" target="_blank" rel="noreferrer">PDF</a>
+                <a class="btn" href="#" target="_blank" rel="noreferrer">DOI</a>
+                <a class="btn" href="#" target="_blank" rel="noreferrer">Code</a>
+              </div>
+            </div>
+
+            <div class="item col-12">
+              <h3>(Add more publications here)</h3>
+              <div class="meta">Authors · Venue · Year</div>
+              <div class="muted">Add a short description and links.</div>
+              <div class="tags">
+                <a class="btn" href="#" target="_blank" rel="noreferrer">PDF</a>
+                <a class="btn" href="#" target="_blank" rel="noreferrer">DOI</a>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="muted small" style="margin-bottom:0;">
+            Tip: Add your Google Scholar link in the Contact section and link it here too.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Work Experience ===== -->
+    <section id="experience" class="section">
+      <div class="container">
+        <h2>Work Experience</h2>
+        <div class="grid">
+
+          <div class="item col-6">
+            <h3>Metering Engineer — Energicity DBA Power Leone</h3>
+            <div class="meta">Freetown, Sierra Leone · May 2021 – June 2022</div>
+            <ul class="muted" style="margin:0; padding-left:18px;">
+              <li>Supervised a team of five meter builders in developing 4,000+ smart meters</li>
+              <li>Led transition from circuitry prototypes to PCB implementation</li>
+              <li>Managed a three-month project timeline, reducing delays in assigning customer meters</li>
+              <li>Executed daily troubleshooting and coordinated fixes with field engineers</li>
+            </ul>
+          </div>
+
+          <div class="item col-6">
+            <h3>IT Engineer — Africell SL</h3>
+            <div class="meta">Freetown, Sierra Leone · Dec 2020 – Apr 2021</div>
+            <ul class="muted" style="margin:0; padding-left:18px;">
+              <li>Worked at the IT help desk, supporting users and troubleshooting systems</li>
+              <li>Configured routers and assisted customers with network setup</li>
+              <li>Ran network/fiber cables and helped build a small network for ~15 employees</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Extra Curricular ===== -->
+    <section id="extra" class="section">
+      <div class="container">
+        <h2>Extra Curricular</h2>
+        <div class="grid">
+
+          <div class="item col-4">
+            <h3>Volunteer Workshop Host</h3>
+            <div class="muted">
+              Hosted a workshop to teach students in Sierra Leone how to apply for university scholarships (SoAYL partnership).
+              <div class="muted small" style="margin-top:8px;">July 2024</div>
+            </div>
+          </div>
+
+          <div class="item col-4">
+            <h3>IoT Club General Manager</h3>
+            <div class="muted">
+              Carnegie Mellon University Africa
+              <div class="muted small" style="margin-top:8px;">Jan 2023 – May 2023</div>
+            </div>
+          </div>
+
+          <div class="item col-4">
+            <h3>College Application Reviewer</h3>
+            <div class="muted">
+              Reviewed graduate applications for potential incoming students at UMass Amherst.
+              <div class="muted small" style="margin-top:8px;">Nov 2024 – Dec 2024</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="grid" style="margin-top:14px;">
+          <div class="item col-12">
+            <h3>Technologies</h3>
+            <div class="muted">
+              <strong>Programming:</strong> C++, C, MATLAB, Arduino, Python, HTML, R, Assembly<br/>
+              <strong>Tools/Platforms:</strong> Cesium, Cisco Packet Tracer, Unix/Linux, PV System Design, PCB Dev,
+              Machine Learning, Neural Networks, Data Analytics, LaTeX, VS Code, Google Earth Engine, SolidWorks, MPLAB IDE, Keil uVision, ProjectLibre
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="card" style="padding:18px;">
+          <div class="grid">
+            <div class="item col-6">
+              <h3>Let’s connect</h3>
+              <p class="muted" style="margin-top:0;">
+                Best ways to reach me:
+              </p>
+
+              <div class="tags">
+                <a class="btn" href="mailto:skoroma@umass.edu">Email</a>
+                <a class="btn" href="https://linkedin.com/in/sanuratu-koroma" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a class="btn" href="https://github.com/Sanuratuk" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="btn" href="./cv.pdf" target="_blank" rel="noreferrer">CV</a>
+
+                <!-- Optional -->
+                <a class="btn" href="#" target="_blank" rel="noreferrer">Google Scholar</a>
+                <a class="btn" href="#" target="_blank" rel="noreferrer">ORCID</a>
+              </div>
+
+              <!-- ✅ Pre-filled email request for phone number -->
+              <div class="tags" style="margin-top:12px;">
+                <a class="btn"
+                   href="mailto:skoroma@umass.edu?subject=Request%20for%20phone%20number&body=Hi%20Sanuratu%2C%0A%0AI%20came%20across%20your%20website%20and%20would%20love%20to%20connect%20by%20phone.%20If%20you%E2%80%99re%20comfortable%2C%20could%20you%20share%20the%20best%20number%20and%20a%20good%20time%20to%20call%3F%0A%0AThanks%2C%0A%5BYour%20Name%5D">
+                  Request phone number
+                </a>
+              </div>
+            </div>
+
+            <div class="item col-6">
+              <h3>Location</h3>
+              <div class="muted">Amherst, Massachusetts, USA</div>
+              <div class="muted small" style="margin-top:10px;">
+                (Optional) Add availability: “Open to internships/collaborations in …”
+              </div>
+            </div>
+          </div>
+
+          <p class="muted small" style="margin-bottom:0;">
+            © <span id="year"></span> Sanuratu Koroma. Built with plain HTML/CSS/JS and hosted on GitHub Pages.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container small">
+        <div class="muted">Minimal, fast, and GitHub Pages-friendly.</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // ====== Edit your projects here ======
+    const PROJECTS = [
+      {
+        title: "Urbanization Trends in Cities (Ongoing)",
+        period: "Ongoing",
+        description: "Employing machine learning and data science tools to understand urbanization trends in cities.",
+        tags: ["Geospatial", "Machine Learning", "Urban Analytics"],
+        links: []
+      },
+      {
+        title: "Health Facility Emission Prediction & Climate Finance (IEEE GHTC)",
+        period: "Aug 2022 – Jan 2025",
+        description: "Second author on an IEEE Global Humanitarian Conference paper on digital monitoring for health facility emission prediction and climate finance.",
+        tags: ["Sustainability", "Energy", "ML"],
+        links: []
+      },
+      {
+        title: "Survey Study: Jail-breaking Large Language Models",
+        period: "2024",
+        description: "Conducted a survey study of techniques used for jail-breaking large language models (LLMs).",
+        tags: ["LLMs", "Security", "Research"],
+        links: []
+      },
+      {
+        title: "OpenPMU PCB Assembly (Rwanda Energy Group)",
+        period: "2023",
+        description: "Assembled and tested PCB boards to fix OpenPMU as a summer research assistant.",
+        tags: ["Embedded", "PCB", "Energy"],
+        links: []
+      },
+      {
+        title: "Microfinance & Electricity Demand Modeling",
+        period: "Aug 2022 – Jan 2025",
+        description: "Worked with a team of researchers to identify and develop suitable models for microfinance and electricity demand modeling.",
+        tags: ["Modeling", "Energy", "Data Science"],
+        links: []
+      },
+      {
+        title: "People Counting in Low-Quality Video (YOLO, BoT-SORT, OSNet)",
+        period: "2024",
+        description: "Tested YOLO, BoT-SORT, and OSNet performance for counting people in low-quality video and an African demographic.",
+        tags: ["Computer Vision", "Deep Learning"],
+        links: []
+      },
+      {
+        title: "Wireless Baby Monitor for Deaf Parents (Capstone)",
+        period: "2020",
+        description: "Developed a wireless baby monitor designed to support deaf parents (undergraduate capstone).",
+        tags: ["IoT", "Embedded", "Hardware"],
+        links: []
+      }
+    ];
+
+    // ====== Rendering + filtering ======
+    const grid = document.getElementById("projectsGrid");
+    const search = document.getElementById("projectSearch");
+    const tagFilter = document.getElementById("tagFilter");
+
+    function uniq(arr){ return [...new Set(arr)].sort((a,b)=>a.localeCompare(b)); }
+
+    function buildTagOptions(){
+      const allTags = uniq(PROJECTS.flatMap(p => p.tags || []));
+      for (const t of allTags){
+        const opt = document.createElement("option");
+        opt.value = t;
+        opt.textContent = t;
+        tagFilter.appendChild(opt);
+      }
+    }
+
+    function projectCard(p){
+      const links = (p.links || []).map(l =>
+        `<a class="btn" href="${l.url}" target="_blank" rel="noreferrer">${l.label}</a>`
+      ).join("");
+
+      const tags = (p.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
+
+      return `
+        <div class="item col-6" data-tags="${(p.tags||[]).join(",")}">
+          <h3>${p.title}</h3>
+          <div class="meta">${p.period || ""}</div>
+          <div class="muted">${p.description || ""}</div>
+          <div class="tags" style="margin-top:12px;">${links}</div>
+          <div class="tags" style="margin-top:10px;">${tags}</div>
+        </div>
+      `;
+    }
+
+    function render(){
+      const q = (search.value || "").toLowerCase().trim();
+      const t = tagFilter.value;
+
+      const filtered = PROJECTS.filter(p => {
+        const blob = (p.title + " " + (p.description||"") + " " + (p.tags||[]).join(" ")).toLowerCase();
+        const matchesQuery = !q || blob.includes(q);
+        const matchesTag = (t === "all") || (p.tags || []).includes(t);
+        return matchesQuery && matchesTag;
+      });
+
+      grid.innerHTML = filtered.map(projectCard).join("");
+
+      if (filtered.length === 0){
+        grid.innerHTML = `<div class="item col-12"><h3>No matches</h3><div class="muted">Try a different search or tag filter.</div></div>`;
+      } else if (filtered.length === 1){
+        grid.firstElementChild.classList.remove("col-6");
+        grid.firstElementChild.classList.add("col-12");
+      }
+    }
+
+    buildTagOptions();
+    render();
+    search.addEventListener("input", render);
+    tagFilter.addEventListener("change", render);
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
